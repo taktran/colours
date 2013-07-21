@@ -17,6 +17,10 @@ html, body {
     float: left; }
   .board h3 {
     text-align: center; }
+  .board input {
+    width: 80%;
+    display: block;
+    margin: auto; }
 
 .player-1 {
   background-color: #ffd300; }
@@ -24,5 +28,9 @@ html, body {
 .player-2 {
   background-color: #0088bf; }
 
-.combined {
+.combined > div {
+  height: 50%; }
+.combined .goal {
   background-color: #00a368; }
+.combined .current {
+  background-color: #005f24; }

@@ -1,3 +1,7 @@
+// $yellow: hsl(50, 100, 50); //#FFD300;
+// $blue: hsl(197, 100, 37); //#0088BF;
+// $green: hsl(158, 100, 32); //#00A368;
+
 $yellow: #FFD300;
 $blue: #0088BF;
 $green: #00A368;
@@ -27,6 +31,12 @@ html, body {
   h3 {
     text-align: center;
   }
+
+  input {
+    width: 80%;
+    display: block;
+    margin: auto;
+  }
 }
 
 .player-1 {
@@ -38,5 +48,15 @@ html, body {
 }
 
 .combined {
-  background-color: $green;
+  & > div {
+    height: 50%;
+  }
+
+  .goal {
+    background-color: $green;
+  }
+
+  .current {
+    background-color: $green - #444444;
+  }
 }
