@@ -88,8 +88,8 @@ sp.on("data", function (data) { // call back when data is received
 
   readData += data.toString(); // append data to buffer
 
-  // if the letters "A" and "B" are found on the buffer then isolate what"s in the middle
-  // as clean data. Then clear the buffer.
+  // Look for json data starting with { and ending with \n.
+  // Get this data, then clear the buffer.
   if (readData.indexOf("{") >= 0 &&
       readData.indexOf("\n") >= 0) {
     cleanData = readData.substring(readData.indexOf("{"), readData.indexOf("\n"));
