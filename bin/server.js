@@ -90,7 +90,7 @@ sp.on("data", function (data) { // call back when data is received
 
   // if the letters "A" and "B" are found on the buffer then isolate what"s in the middle
   // as clean data. Then clear the buffer.
-  if (readData.indexOf("{") >= 0 && readData.indexOf("}") >= 0) {
+  if (readData.indexOf("{") >= 0 && readData.indexOf("\n") >= 0) {
       cleanData = readData.substring(readData.indexOf("{") + 1, readData.indexOf("}"));
       readData = "";
 
