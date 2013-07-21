@@ -7,6 +7,9 @@ html, body {
   width: 100%;
   height: 100%; }
 
+.row {
+  margin: 0; }
+
 .board {
   height: 100%; }
   .board > div {
@@ -22,8 +25,5 @@ html, body {
     margin: 20px auto 0; }
 
 .combined > div {
-  height: 50%; }
-.combined .goal {
-  background-color: #00a368; }
-.combined .current {
-  background-color: #005f24; }
+  height: 50%;
+  display: block; }
