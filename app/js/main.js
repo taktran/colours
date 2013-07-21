@@ -22,10 +22,25 @@
     $(".player input[type=range]").change(function() {
       updateColours();
     });
+
+    $(".done").click(function() {
+      reset();
+      $(this).hide();
+    });
   }
 
   function reset() {
     init();
+  }
+
+  function goalCompletedEvent() {
+    console.log("Goal complete");
+    $(".container")
+      .hide()
+      .fadeIn(500, function() {
+        $(".done").show();
+      });
+
   }
 
   function random(min, max) {
@@ -98,8 +113,7 @@
     }
 
     if (goalComplete()) {
-      console.log("Goal complete");
-      reset();
+      goalCompletedEvent();
     }
   }
 
