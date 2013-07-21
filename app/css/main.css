@@ -21,12 +21,6 @@ html, body {
     display: block;
     margin: 20px auto 0; }
 
-.player-1 {
-  background-color: #ffd300; }
-
-.player-2 {
-  background-color: #0088bf; }
-
 .combined > div {
   height: 50%; }
 .combined .goal {
