@@ -91,10 +91,16 @@ sp.on("data", function (data) { // call back when data is received
   // if the letters "A" and "B" are found on the buffer then isolate what"s in the middle
   // as clean data. Then clear the buffer.
   if (readData.indexOf("{") >= 0 && readData.indexOf("\n") >= 0) {
-      cleanData = readData.substring(readData.indexOf("{") + 1, readData.indexOf("}"));
+      cleanData = readData.substring(readData.indexOf("{"), readData.indexOf("\n"));
+
+      var sensor1Matches = cleanData.match(/sensor1: ?(\d+)/),
+        sensor1 = sensor1Matches[1],
+        sensor2Matches = cleanData.match(/sensor2: ?(\d+)/),
+        sensor2 = sensor2Matches[1];
+
       readData = "";
 
-      console.log("data: " + cleanData);
-      io.sockets.emit("message", cleanData);
+      console.log("data: ", sensor1, sensor2);
+      io.sockets.emit("message", sensor1);
   }
 });
