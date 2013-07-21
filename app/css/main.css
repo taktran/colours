@@ -14,8 +14,9 @@ html, body {
     display: block;
     width: 33.33333%;
     height: 100%;
-    min-height: 500px;
     float: left; }
+  .board h3 {
+    text-align: center; }
 
 .player-1 {
   background-color: #ffd300; }
