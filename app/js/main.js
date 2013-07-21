@@ -1,36 +1,49 @@
 (function (){
   'use strict';
 
-  var RGB_MAX = 255,
-    NUM_PLAYERS = 2;
+  var NUM_PLAYERS = 2;
 
   function init() {
     var player1El = $(".player-1 input"),
       player2El = $(".player-2 input"),
-      randomVal1 = Math.floor((Math.random() * player1El.attr("max")) + player1El.attr("max")),
-      randomVal2 = Math.floor((Math.random() * player2El.attr("max")) + player2El.attr("max"));
+      randomInput1 = random(player1El.attr("min"), player1El.attr("max")),
+      randomInput2 = random(player2El.attr("min"), player2El.attr("max")),
+      goalEl = $(".combined .goal");
 
-    $(".player-1 input").val(randomVal1);
-    $(".player-2 input").val(randomVal2);
+    $(".player-1 input").val(randomInput1);
+    $(".player-2 input").val(randomInput2);
+
+    // Random goal
+    goalEl.css("background-color", randomRGB(player1El.attr("min"), player1El.attr("max")));
 
     updateColours();
 
-    $(".player input[type=range]").change(function(data) {
-      var el = $(data.target),
-        val = el.val(),
-        playerNum = el.parent().data("player-num");
-
-      console.log("range change", playerNum, val, combinedColour());
-
+    $(".player input[type=range]").change(function() {
       updateColours();
     });
+  }
+
+  function random(min, max) {
+    return Math.floor((Math.random() * parseInt(max, 10)) + parseInt(min, 10));
+  }
+
+  function randomRGB(min, max) {
+    var randomVal1 = random(min, max),
+      randomVal2 = random(min, max);
+
+    return "rgb(" + randomVal1 + ", 0, " + randomVal2 + ")";
   }
 
   function combinedColour() {
     var player1Colour = $(".player-1 input").val(),
       player2Colour = $(".player-2 input").val();
 
-    return (player1Colour + player2Colour) % RGB_MAX;
+    return "rgb(" + player1Colour + ", " + "0, " + player2Colour + ")";
+  }
+
+  function updateCombinedColour() {
+    var combinedEl = $(".combined .current");
+    combinedEl.css("background-color", combinedColour());
   }
 
   function updateColours() {
@@ -47,6 +60,8 @@
       }
 
       playerEl.css("background-color", playerColour);
+      updateCombinedColour();
+
       console.log("update", n, playerInput, playerColour);
     }
   }
