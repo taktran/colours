@@ -24,7 +24,10 @@
   }
 
   function random(min, max) {
-    return Math.floor((Math.random() * parseInt(max, 10)) + parseInt(min, 10));
+    var minInt = parseInt(min, 10),
+      maxInt = parseInt(max, 10);
+
+    return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
   }
 
   function randomGoal(min, max) {
