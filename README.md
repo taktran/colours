@@ -1,10 +1,6 @@
-# Starttter
+# Colours
 
-A website boilerplate, with the following features
-
-* [Twitter Bootstrap](http://twitter.github.com/bootstrap/) (from [H5BP initializer](http://www.initializr.com/))
-* [GruntJS](http://gruntjs.com/) - with [Sass](http://sass-lang.com/download.html), [Livereload](https://github.com/gruntjs/grunt-contrib-livereload), and [JSHint](http://www.jshint.com/about/) support
-* Testing - with [karma](http://karma-runner.github.io/) and [jasmine](http://pivotal.github.io/jasmine/)
+A HACKED.io project about colours
 
 ## Installation
 
