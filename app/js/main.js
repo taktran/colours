@@ -2,6 +2,7 @@
   'use strict';
 
   var NUM_PLAYERS = 2,
+    GOAL_THRESHOLD = 5,
     goal;
 
   function init() {
@@ -21,6 +22,10 @@
     $(".player input[type=range]").change(function() {
       updateColours();
     });
+  }
+
+  function reset() {
+    init();
   }
 
   function random(min, max) {
@@ -58,13 +63,15 @@
     combinedEl.css("background-color", combinedColour());
   }
 
-  function goalCheck() {
-    var player1Colour = $(".player-1 input").val(),
-      player2Colour = $(".player-2 input").val();
+  function goalComplete() {
+    var player1Colour = parseInt($(".player-1 input").val(), 10),
+      player2Colour = parseInt($(".player-2 input").val(), 10);
 
-    return player1Colour === goal.r &&
-      0 === goal.g &&
-      player2Colour === goal.b;
+    console.log(player1Colour, player2Colour, goal);
+
+    return (player1Colour - goal.r <= GOAL_THRESHOLD) &&
+      (0 - goal.g <= GOAL_THRESHOLD) &&
+      (player2Colour - goal.b <= GOAL_THRESHOLD);
 
   }
 
@@ -83,8 +90,11 @@
 
       playerEl.css("background-color", playerColour);
       updateCombinedColour();
+    }
 
-      console.log("update", n, playerInput, playerColour, goal, goalCheck());
+    if (goalComplete()) {
+      console.log("Goal complete");
+      reset();
     }
   }
 
