@@ -5,8 +5,10 @@
     NUM_PLAYERS = 2;
 
   function init() {
-    var randomVal1 = Math.floor((Math.random() * 255)),
-      randomVal2 = Math.floor((Math.random() * 255));
+    var player1El = $(".player-1 input"),
+      player2El = $(".player-2 input"),
+      randomVal1 = Math.floor((Math.random() * player1El.attr("max")) + player1El.attr("max")),
+      randomVal2 = Math.floor((Math.random() * player2El.attr("max")) + player2El.attr("max"));
 
     $(".player-1 input").val(randomVal1);
     $(".player-2 input").val(randomVal2);
