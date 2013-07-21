@@ -37,7 +37,7 @@ void loop() {
   bool sensorHasChanged = (prevSensorValue != sensorValue);
   bool sensor2HasChanged = (prevSensor2Value != sensorValue2);
   if (sensorHasChanged || sensor2HasChanged) {
-    p("%i %i\n", sensorValue, sensorValue2);
+    p("{'sensor1': %i, 'sensor2': %i}\n", sensorValue, sensorValue2);
   }
 
   if (sensorHasChanged) {
