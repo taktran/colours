@@ -8,8 +8,7 @@ html, body {
   height: 100%; }
 
 .board {
-  height: 100%;
-  padding: 0; }
+  height: 100%; }
   .board > div {
     display: block;
     width: 33.33333%;
@@ -20,7 +19,7 @@ html, body {
   .board input {
     width: 80%;
     display: block;
-    margin: auto; }
+    margin: 20px auto 0; }
 
 .player-1 {
   background-color: #ffd300; }
