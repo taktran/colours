@@ -42,9 +42,14 @@
       goalRGB;
 
     goal = { r: randomVal1, g: 0, b: randomVal2 };
-    goalRGB = rgbCSS(goal);
 
-    goalEl.css("background-color", goalRGB);
+    if (goalComplete()) {
+      console.log("Goal done too early, getting another goal");
+      randomGoal(min, max);
+    } else {
+      goalRGB = rgbCSS(goal);
+      goalEl.css("background-color", goalRGB);
+    }
   }
 
   function rgbCSS(rgbHash) {
