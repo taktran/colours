@@ -69,9 +69,9 @@
 
     console.log(player1Colour, player2Colour, goal);
 
-    return (player1Colour - goal.r <= GOAL_THRESHOLD) &&
-      (0 - goal.g <= GOAL_THRESHOLD) &&
-      (player2Colour - goal.b <= GOAL_THRESHOLD);
+    return (Math.abs(player1Colour - goal.r) <= GOAL_THRESHOLD) &&
+      (Math.abs(0 - goal.g) <= GOAL_THRESHOLD) &&
+      (Math.abs(player2Colour - goal.b) <= GOAL_THRESHOLD);
 
   }
 
