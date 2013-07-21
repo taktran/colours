@@ -20,11 +20,15 @@
 <body>
     <h1>Arduino + Node.js + socket.io</h1>
 
-    <div id="monitor" style="width:600px;height:300px;"></div>
+    <h2>Sensor 1</h2>
+    <div id="sensor1" style="width:600px;height:300px;"></div>
+
+    <h2>Sensor 2</h2>
+    <div id="sensor2" style="width:600px;height:300px;"></div>
 
     <script type="text/javascript">
         !function() {
-            var $monitor = $("#monitor");
+            var sensor1 = $("#sensor1");
             var p1 = [];
             var options = {
                 series: {
@@ -45,7 +49,7 @@
                 socket.emit("message", "Connected - " + (new Date()).toString());
             });
 
-            socket.on("message", function (data) {
+            socket.on("sensor1", function (data) {
                 var arr = [];
 
                 if(p1.length > 9) p1.shift(); // Remove first items
@@ -54,10 +58,49 @@
                 for(var i = 0; i < p1.length; i++) {
                     arr.push([i, p1[i]]);
                 }
-                $.plot($monitor, [arr], options);
+                $.plot(sensor1, [arr], options);
             });
 
-            $.plot($monitor, [p1], options);
+            $.plot(sensor1, [p1], options);
+        }();
+    </script>
+
+    <script type="text/javascript">
+        !function() {
+            var sensor2 = $("#sensor2");
+            var p1 = [];
+            var options = {
+                series: {
+                    lines: { fill: true }
+                },
+                yaxis: {
+                    min: 0,
+                    max: 1100
+                }
+            };
+            var socket = io.connect("/", {
+                "reconnect" : true,
+                "reconnection delay" : 500,
+                "max reconnection attempts" : 10
+            });
+
+            socket.on("connect", function(data) {
+                socket.emit("message", "Connected - " + (new Date()).toString());
+            });
+
+            socket.on("sensor2", function (data) {
+                var arr = [];
+
+                if(p1.length > 9) p1.shift(); // Remove first items
+                p1.push(data);
+
+                for(var i = 0; i < p1.length; i++) {
+                    arr.push([i, p1[i]]);
+                }
+                $.plot(sensor2, [arr], options);
+            });
+
+            $.plot(sensor2, [p1], options);
         }();
     </script>
 </body>
