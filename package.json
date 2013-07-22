@@ -11,8 +11,9 @@
   "license": "BSD",
   "dependencies": {
     "serialport": "*",
-    "socket.io": "0.9.6"
-    },
+    "socket.io": "0.9.6",
+    "johnny-five": "~0.7.0"
+  },
   "devDependencies": {
     "matchdep": "~0.1.2",
     "grunt": "~0.4.0",
