@@ -7,7 +7,8 @@
     SENSOR_MAX = 1023,
     INPUT_MIN = 100,
     INPUT_MAX = 255,
-    goal;
+    goal,
+    isDone = false;
 
   function init() {
     var player1El = $(".player-1 input"),
@@ -30,6 +31,7 @@
     $(".done").click(function() {
       reset();
       $(this).hide();
+      isDone = false;
     });
 
     // Socket.io
@@ -44,17 +46,21 @@
     });
 
     socket.on("sensor1", function(value) {
-      var mappedValue = mapSensorValue(value);
-      console.log("1:", value, mappedValue);
-      player1El.val(mappedValue);
-      updateColours();
+      if (!isDone) {
+        var mappedValue = mapSensorValue(value);
+        console.log("1:", value, mappedValue);
+        player1El.val(mappedValue);
+        updateColours();
+      }
     });
 
     socket.on("sensor2", function(value) {
-      var mappedValue = mapSensorValue(value);
-      console.log("2:", value, mappedValue);
-      player2El.val(mappedValue);
-      updateColours();
+      if (!isDone) {
+        var mappedValue = mapSensorValue(value);
+        console.log("2:", value, mappedValue);
+        player2El.val(mappedValue);
+        updateColours();
+      }
     });
   }
 
@@ -72,6 +78,8 @@
   }
 
   function goalCompletedEvent() {
+    isDone = true;
+
     console.log("Goal complete");
     $(".container")
       .hide()
