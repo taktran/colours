@@ -16,6 +16,15 @@ A HACKED.io project about colours
 
 ## Development
 
+1. Connect arduino to the computer
+2. Upload `arduino/potentiometer/potentiometer.ino` into the arduino
+3. Start the node server: `node bin/server.js`
+4. Go to http://localhost:9090/
+
+   To see input values, go to http://localhost:9090/input.html
+
+### Old instructions (needed to generate sass)
+
 Start the server
 
     grunt

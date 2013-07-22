@@ -3,6 +3,10 @@
 
   var NUM_PLAYERS = 2,
     GOAL_THRESHOLD = 5,
+    SENSOR_MIN = 0,
+    SENSOR_MAX = 1023,
+    INPUT_MIN = 100,
+    INPUT_MAX = 255,
     goal;
 
   function init() {
@@ -27,10 +31,44 @@
       reset();
       $(this).hide();
     });
+
+    // Socket.io
+    var socket = io.connect("/", {
+      "reconnect" : true,
+      "reconnection delay" : 500,
+      "max reconnection attempts" : 10
+    });
+
+    socket.on("connect", function() {
+      socket.emit("message", "Connected - " + (new Date()).toString());
+    });
+
+    socket.on("sensor1", function(value) {
+      var mappedValue = mapSensorValue(value);
+      console.log("1:", value, mappedValue);
+      player1El.val(mappedValue);
+      updateColours();
+    });
+
+    socket.on("sensor2", function(value) {
+      var mappedValue = mapSensorValue(value);
+      console.log("2:", value, mappedValue);
+      player2El.val(mappedValue);
+      updateColours();
+    });
   }
 
   function reset() {
     init();
+  }
+
+  function mapSensorValue(value) {
+    var valueProportion = value / (SENSOR_MAX - SENSOR_MIN),
+      valueMap = Math.floor(
+        (valueProportion * (INPUT_MAX - INPUT_MIN)) + INPUT_MIN
+      );
+
+    return valueMap;
   }
 
   function goalCompletedEvent() {

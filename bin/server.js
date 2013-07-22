@@ -15,7 +15,7 @@ function handle (req, res) {
 
   var filename = request.pathname;
 
-  if (filename == "/") { filename = "/input.html"; }
+  if (filename == "/") { filename = "/index.html"; }
 
   filename = root + filename;
 
@@ -32,6 +32,8 @@ function handle (req, res) {
     contentType = "text/javascript";
   } else if (filename.match(".html$")) {
     contentType = "text/html";
+  } else if (filename.match(".css$")) {
+    contentType = "text/css";
   }
 
   fs.readFile(filename, function(err, data) {

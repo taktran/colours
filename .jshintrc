@@ -36,6 +36,8 @@
     "it": true,
     "xdescribe": true,
     "xit": true,
-    "expect": true
+    "expect": true,
+
+    "io": true
   }
 }
