@@ -1,6 +1,8 @@
 # Colours
 
-A HACKED.io project about colours
+A colour matching game with arduino input.
+
+Made for HACKED.io 2013.
 
 ## Installation
 

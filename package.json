@@ -1,7 +1,7 @@
 {
   "name": "Colours",
   "version": "0.0.1",
-  "description": "A HACKED.io project about colours",
+  "description": "A colour matching game with arduino input",
   "main": "bin/server.js",
   "repository": {
     "type": "git",
