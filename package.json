@@ -1,14 +1,11 @@
 {
-  "name": "starttter",
+  "name": "Colours",
   "version": "0.0.1",
-  "description": "A website boilerplate for starttting",
-  "main": "Gruntfile.js",
-  "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
-  },
+  "description": "A HACKED.io project about colours",
+  "main": "bin/server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/taktran/starttter.git"
+    "url": "https://github.com/taktran/colours.git"
   },
   "author": "Tak Tran (contact@tutaktran.com)",
   "license": "BSD",
