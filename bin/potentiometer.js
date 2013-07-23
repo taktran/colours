@@ -6,62 +6,57 @@
 // 3) Update port to relevant port name
 // 4) Run this program
 
+"use strict";
+
 var five = require("johnny-five"),
   board = new five.Board({ port: "/dev/tty.usbserial-A800ep51" }),
-  pot = {
-    "val": 0,
-    "prev": 0
-  },
-  pot2 = {
-    "val": 0,
-    "prev": 0
-  },
-  potHasChanged = function ( p ) {
-    return ( p.val !== p.prev );
-  },
-  printPot = function () {
-    console.log("{ sensor1: " + pot.val + ", sensor2: " + pot2.val + " }")
+  pot, pot2,
+  printPots = function () {
+    console.log("{ sensor1: " + pot + ", sensor2: " + pot2 + " }");
   };
 
+var Potentiometer = function(sensorPin) {
+  var self = this;
+
+  self.val = 0;
+  self.prev = 0;
+
+  self.sensor = new five.Sensor({
+    pin: sensorPin,
+    freq: 250
+  });
+
+  self.sensor.on("read", function( err, value ) {
+    self.val = value;
+
+    if ( self.hasChanged() ) {
+      printPots();
+      self.prev = self.val;
+    }
+  });
+};
+
+// Inject the `sensor` hardware into
+// the Repl instance's context.
+// Allows direct command line access
+Potentiometer.prototype.injectIntoRepl = function(board) {
+  board.repl.inject({
+    pot: this.sensor
+  });
+};
+
+Potentiometer.prototype.hasChanged = function() {
+  return this.val !== this.prev;
+};
+
+Potentiometer.prototype.toString = function() {
+  return this.val;
+};
+
 board.on("ready", function() {
+  pot = new Potentiometer("A0");
+  pot2 = new Potentiometer("A1");
 
-  // Create a new `potentiometer` hardware instance.
-  potentiometer = new five.Sensor({
-    pin: "A0",
-    freq: 250
-  });
-
-  potentiometer2 = new five.Sensor({
-    pin: "A1",
-    freq: 250
-  });
-
-  // Inject the `sensor` hardware into
-  // the Repl instance's context;
-  // allows direct command line access
-  board.repl.inject({
-    pot: potentiometer
-  });
-
-  board.repl.inject({
-    pot: potentiometer2
-  });
-
-  potentiometer.on("read", function( err, value ) {
-    pot.val = value;
-
-    if ( potHasChanged(pot) ) {
-      printPot();
-      pot.prev = pot.val;
-    }
-  });
-
-  potentiometer2.on("read", function( err, value ) {
-    pot2.val = value;
-
-    if ( potHasChanged(pot2) ) {
-      printPot();
-      pot2.prev = pot2.val;
-    }
-  });
+  pot.injectIntoRepl(board);
+  pot2.injectIntoRepl(board);
 });
